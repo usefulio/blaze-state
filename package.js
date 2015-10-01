@@ -28,11 +28,11 @@ Package.onTest(function(api) {
     'templating'
   ], 'client');
 
-  api.addAssets([
+  api.addFiles([
     'tests/testingTemplate.html'
   ], 'client');
 
   api.addFiles([
     'tests/state.js'
-  ]);
+  ], 'client');
 });
