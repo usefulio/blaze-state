@@ -1,7 +1,7 @@
 if (Meteor.isClient) {
   console.log(Template);
-  console.log(Template.testingTemplate);
-  State.mixin(Template.testingTemplate, {
+  console.log(Template.TestingTemplate);
+  State.mixin(Template.TestingTemplate, {
     name: 'color'
     , default: 'red'
     , options: [
