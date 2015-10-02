@@ -26,6 +26,7 @@ Package.onTest(function(api) {
   api.use('useful:state');
   api.use([
     'templating'
+    , 'underscore'
   ], 'client');
 
   api.addFiles([
