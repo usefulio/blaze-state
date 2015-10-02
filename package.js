@@ -22,7 +22,18 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  // api.use('tinytest');
-  // api.use('state');
-  // api.addFiles('state-tests.js');
+  api.use('tinytest');
+  api.use('useful:state');
+  api.use([
+    'templating'
+    , 'underscore'
+  ], 'client');
+
+  api.addFiles([
+    'tests/testingTemplate.html'
+  ], 'client');
+
+  api.addFiles([
+    'tests/state.js'
+  ], 'client');
 });
