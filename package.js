@@ -1,8 +1,8 @@
 Package.describe({
   name: 'useful:blaze-state',
   version: '0.0.1',
-  summary: 'Quickly add a state variable to a Blaze Template',
-  git: 'https://github.com/usefulio/state.git',
+  summary: 'Quickly add a reactive state variable to a Blaze Template',
+  git: 'https://github.com/usefulio/blaze-state.git',
   documentation: 'README.md'
 });
 
