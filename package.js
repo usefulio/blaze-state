@@ -11,6 +11,7 @@ Package.onUse(function(api) {
 
   api.use([
     'reactive-var'
+    , 'templating'
   ], 'client');
 
   api.addFiles([
