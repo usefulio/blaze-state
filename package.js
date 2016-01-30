@@ -12,6 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'reactive-var'
     , 'templating'
+    , 'underscore'
   ], 'client');
 
   api.addFiles([
@@ -32,6 +33,7 @@ Package.onTest(function(api) {
 
   api.addFiles([
     'tests/testingTemplate.html'
+    , 'tests/testingTemplate2.html'
   ], 'client');
 
   api.addFiles([

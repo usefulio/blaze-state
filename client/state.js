@@ -1,6 +1,8 @@
 State = {};
 
 /**
+	templates = can be either a single template or an array of templates that will share the same state
+
 	options = {
 		name: string name of the state variable to keep track of
 		(optional) default: default value to initialize state variable to
@@ -9,30 +11,46 @@ State = {};
 	}
 **/
 
-State.mixin = function(template, options) {
+State.mixin = function(templates, options) {
 
 	var properName = options.name.charAt(0).toUpperCase() + options.name.slice(1);
 
-	template.onCreated(function() {
-		var tmpl = this;
-		tmpl[options.name] = new ReactiveVar(options.default);
-	});
+	var stateVar = new ReactiveVar(options.default);
 
-	var helpers = {};
-	helpers[options.name] = function () {
-		return Template.instance()[options.name].get();
-	}
-	helpers[options.name + 'Options'] = function () {
-		return options.options;
-	}
-	helpers['isCurrent' + properName] = function (value) {
-		return value === Template.instance()[options.name].get();
-	}
-	template.helpers(helpers);
+	if (templates instanceof Blaze.Template) {
+		templates = [ templates ]; 
+	} 
 
-	var events = {};
-	events['set'+properName] = function(e, tmpl, value) {
-		Template.instance()[options.name].set(value);
+	var context = {
+		properName: properName
+		, stateVar: stateVar
 	};
-	template.events(events);
+
+	_.each(templates, function (template) {
+		// add onCreated hooks
+		template.onCreated(function() {
+			var tmpl = this;
+			tmpl[options.name] = stateVar;
+		});
+
+		// add template helper hooks
+		var helpers = {};
+		helpers[options.name] = function () {
+			return Template.instance()[options.name].get();
+		}
+		helpers[options.name + 'Options'] = function () {
+			return options.options;
+		}
+		helpers['isCurrent' + properName] = function (value) {
+			return value === Template.instance()[options.name].get();
+		}
+		template.helpers(helpers);
+
+		// add event hooks
+		var events = {};
+		events['set'+properName] = function(e, tmpl, value) {
+			Template.instance()[options.name].set(value);
+		};
+		template.events(events);
+	}.bind(context));
 };
