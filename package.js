@@ -1,6 +1,6 @@
 Package.describe({
   name: 'useful:blaze-state',
-  version: '0.0.2',
+  version: '0.0.3',
   summary: 'Quickly add a reactive state variable to a Blaze Template',
   git: 'https://github.com/usefulio/blaze-state.git',
   documentation: 'README.md'
@@ -19,7 +19,7 @@ Package.onUse(function(api) {
     'client/state.js'
   ], 'client');
 
-  api.export('State');
+  api.export('State', 'client');
 
 });
 
